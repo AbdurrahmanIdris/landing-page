@@ -67,7 +67,7 @@ section {
 .navbar__menu ul {
     padding-left: 0;
     margin: 10;
-    text-align: left;
+    text-align: right;
 }
 
 .navbar__menu li {

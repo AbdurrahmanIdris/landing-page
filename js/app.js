@@ -17,60 +17,74 @@
  * Define Global Variables
  * 
 */
-const sectionsList = document.querySelectorAll('section');
-const navBarList = document.getElementById("navbar__list");
-const numOfSections = sectionsList.length //I'll use this variable to calculate the width of the li element style
-const sectionWidth = (100 / numOfSections);
+const sections = document.querySelectorAll('section');
+const navMenu = document.getElementById("navbar__list");
 /**
  * End Global Variables
+ * 
+ * 
+ * 
+ * 
+ * 
  * Start Helper Functions
  * 
 */
-
-
-
+function isInViewPort(element){
+  const position = element.getBoundingClientRect();
+  return (position.top >= 0 && position.top < 0.5 * window.innerHeight);
+};
 /**
  * End Helper Functions
+ * 
+ * 
+ * 
+ * 
+ * 
  * Begin Main Functions
  * 
 */
-
 // build the nav
-for (let index = 1; index <= sectionsList.length; index++){
-  const newListItem = document.createElement('li');
-  const newAnchor = document.createElement('a');
-  const sectionTitle = `Section ${index}`;
-  newAnchor.href = `#section${index}`;
-  newAnchor.innerText = sectionTitle;
-  newListItem.appendChild(newAnchor);
-  navBarList.appendChild(newListItem);
-};
-
-//changing the style.width of each li element automatically
-const liArr = document.getElementsByTagName("LI");
-for(let i = 0; i < liArr.length; i++) {
-  const parent = liArr[i].parentNode;
-  if(parent != null && parent.id == "navbar__list") {
-    liArr[i].style.width = sectionWidth + "%";
-  };        
+function createNavMenuItems(){
+  for(section of sections){
+    const sectionName = section.getAttribute('data-nav');
+    const sectionAnchor = section.getAttribute('id');
+    const newLi = document.createElement('li');
+    newLi.innerHTML = `<a href="#${sectionAnchor}" class="menu__link">${sectionName}</a>`;
+    navMenu.appendChild(newLi);
+  };
 };
 
 // Add class 'active' to section when near top of viewport
-
+function toggleActiveClass(section){
+  for(section of sections){
+    if (isInViewPort(section)){
+      if(!section.classList.contains("your-active-class")){
+        section.classList.add("your-active-class");
+      };
+    } else{
+      section.classList.remove("your-active-class");
+    };
+  };
+};
 
 // Scroll to anchor ID using scrollTO event
 
 
 /**
  * End Main Functions
+ * 
+ * 
+ * 
+ * 
+ * 
  * Begin Events
  * 
 */
 
 // Build menu 
-
+createNavMenuItems();
 // Scroll to section on link click
 
 // Set sections as active
-
+document.addEventListener('scroll',toggleActiveClass);
 
