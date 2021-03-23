@@ -71,6 +71,7 @@ section {
 }
 
 .navbar__menu li {
+    cursor: pointer;
     display: inline-block;
     color:rgb(0, 0, 0);
 }
@@ -88,6 +89,7 @@ section {
     color: #fff;
     transition: ease 0.3s all;
 }
+
 
 /* Header Styles */
 .page__header {
